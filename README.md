@@ -1,5 +1,5 @@
-# NeckPass
-The files in this repository are for the paper: **FOVLeaks: Exploiting Field-of-View Dynamics for Input Inference in VR/AR**
+# RenderLeaks
+The files in this repository are for the paper: **RenderLeaks**.
 
 We provide the following three compressed data packages:
 1. **ExperimentalResults**: This package contains the data sources for all scenarios presented in the paper. It includes processed data and trained models. For each scenario, simply `python run_1.py` to obtain the result data and `python run_2.py` to get the structured results presentation shown in the paper.
