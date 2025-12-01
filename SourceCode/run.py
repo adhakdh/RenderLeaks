@@ -17,7 +17,7 @@ if __name__ == "__main__":
         Result_dict[type_name] = []
             
     for type_name in item_list:
-        input_dir = f"Dataset_FOVLeaks/"
+        input_dir = f"Dataset_RenderLeaks/"
         for usr_name in os.listdir(input_dir):
             usr_dir = os.path.join(input_dir, usr_name)
             for file_name in os.listdir(usr_dir):
