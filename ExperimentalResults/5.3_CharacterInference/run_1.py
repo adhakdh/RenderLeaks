@@ -17,12 +17,12 @@ if __name__ == "__main__":
         Result_dict[type_name] = []
             
     for type_name in item_list:
-        input_dir = f"Dataset_FOVLeaks/"
+        input_dir = f"Dataset_RenderLeaks/"
         for usr_name in os.listdir(input_dir):
             usr_dir = os.path.join(input_dir, usr_name)
             for file_name in os.listdir(usr_dir):
                 file_dir = os.path.join(usr_dir, file_name)
-                scale = file_name.split(".txt")[0].split("_")[1]
+                scale = "0." + file_name.split(".txt")[0].split("_")[1].split(".")[1]
                 scale = float(scale)
                 TRUR_string = ""
                 test1_main(file_dir,0)
