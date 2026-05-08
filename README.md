@@ -1,62 +1,90 @@
 # RenderLeaks
+
 The files in this repository are for the paper: **RenderLeaks**.
 
+We have released sanitized raw data and execution scripts that can reproduce the quantitative results reported in the paper, supporting independent verification of our findings while preserving security. In addition, by replacing the provided sanitized traces with new raw data following the same format, this artifact can also serve as a mini attack prototype. The paper presents the technical principles, workflow, and implementation details of our approach in detail. During the Artifact Evaluation stage, we will provide reviewers with more complete and sensitive artifacts under the appropriate review framework. Thank you for your time and consideration.
+
+## Artifact Packages
+
 We provide the following three compressed data packages:
-1. **ExperimentalResults**: This package contains the data sources for all scenarios presented in the paper. It includes processed data and trained models. For each scenario, simply `python run_1.py` to obtain the result data and `python run_2.py` to get the structured results presentation shown in the paper.
-1. **SourceCode**: This package provides the source code for the technical approach mentioned in the paper. It includes data processing methods. By replacing the dataset with the corresponding scenario dataset mentioned in the paper and running `python run.py`, you can achieve the data processing results presented in the paper.
-1. **Datasets**: This package includes the datasets for each scenario in the paper.
 
-**Detailed Explanation of the First Data Package:.** *ExperimentalResults*. The directory structure is as follows:
+1. **Datasets**  
+   This package includes the datasets for each scenario evaluated in the paper.
 
-```
-requirements.txt
-Result.xlsx
-lib
-├── anchor_data
-├── savedata
-├── lib.py
-├── lib1.py
-├── lib2.py
-└── lib3.py
-5.3_CharacterInference
-├── Dataset_RenderLeaks
-├── run_1.py
-└── run_2.py
-5.4_PasswordandPINInference
-├── Dataset_RenderLeaks
-├── run_1.py
-└── run_2.py
-5.5_WordInference
-├── Dataset_RenderLeaks
-├── run_1.py
-└── run_2.py
-5.6_WebsiteURLInference
-├── Dataset_RenderLeaks
-├── run_1.py
-└── run_2.py
-5.7_Cross-DeviceValidation
-├── Dataset_RenderLeaks
-├── run_1.py
-└── run_2.py
-llm
-├── Dataset_RenderLeaks.xlsx
-├── run_llm.py
-└── run_top3.py
+2. **ExperimentalResults**  
+   This package contains the data sources and execution scripts for all scenarios presented in the paper. For each scenario, users can simply run the corresponding script, such as `python run.py`, to obtain the structured result presentation shown in the paper.
+
+3. **SourceCode**  
+   This package provides the source code and executable components for the technical approach described in the paper. Some components are provided in compiled form to reduce the risk of misuse while preserving the ability to reproduce the reported results.
+
+## Detailed Explanation of the `ExperimentalResults` Package
+
+The directory structure of the **ExperimentalResults** package is as follows:
+
+```text
+├── code/
+│   ├── RenderLeaksRunner.pyc
+│   ├── run0_31key.py
+│   ├── run1_numeric.py
+│   ├── run2_alphabetic.py
+│   ├── run3_alphanumeric.py
+│   └── run4_crossdevice.py
+├── lib/
+│   ├── anchor_data/
+│   ├── savedata/
+│   ├── lib.pyc
+│   ├── lib1.pyc
+│   ├── lib2.pyc
+│   └── lib3.pyc
+├── requirements.txt
+└── results.xlsx
 ```
 
-**Step 1.** In the first-level directory, the `requirements.txt` file lists all the libraries required for this folder. To install the dependencies, execute the following command (My Python version 3.9.11):
-> `pip install -r requirements.txt `
+## Usage Instructions
 
-**Step 2.** The `Result.xlsx` file provides the data presented in each scenario of the paper, serving as a reference outline for readers. 
+**Step 1. Install dependencies.**
 
-**Step 3.** The `lib` folder contains implementations of library functions. The remaining folders correspond to the scenario resource files, named to align with the sections in the paper for easy reference. 
+In the first-level directory, the `requirements.txt` file lists all libraries required for running this package. We used Python 3.9.11 in our experiments. To install the dependencies, run:
 
-**Step 4.** For each scenario (paper section), the folder contains 'Dataset_RenderLeaks', which is the corresponding dataset. In addition, two files: `run_1.py` and `run_2.py`. Running these two files allows you to obtain the results, consistent with those provided in `Result.xlsx` and in the paper. The corresponding commands are as follows:
-> `python run_1.py`
-> `python run_2.py`
+```bash
+pip install -r requirements.txt
+```
 
-**Step 5.** For 'llm' path, the folder contains 'Dataset_RenderLeaks.xlsx', which is the corresponding dataset. In addition, two files: `run_llm.py` and `run_top3.py`. Running these two files allows you to obtain the results, consistent with those provided in `Result.xlsx` and in the paper. The corresponding commands are as follows:
-> `python run_llm.py`
-> `python run_top3.py`
+**Step 2. Check the reference results.**
 
-**If you encounter any difficulties, please don't hesitate to reach out for assistance. Thank you sincerely for your interest, time and patience.**
+The `results.xlsx` file provides the quantitative results presented in each scenario of the paper. It serves as a reference outline for readers to compare with the outputs generated by the scripts.
+
+**Step 3. Understand the library folder.**
+
+The `lib/` folder contains the required library functions, intermediate data, and saved data used by the evaluation scripts.
+
+**Step 4. Reproduce each scenario.**
+
+For each scenario or paper section, run the corresponding script in the `code/` folder to obtain the structured result presentation shown in the paper:
+
+```text
+run0_31key.py          -- B. Core Attack Validation
+run1_numeric.py        -- C. Main Attack on Numeric Passcodes and D. Robustness and Attacker Priors
+run2_alphabetic.py     -- E. Extension to Alphabetic Passwords
+run3_alphanumeric.py   -- E. Extension to Alphanumeric Passwords
+run4_crossdevice.py    -- F. Cross-Device Validation
+```
+
+For example:
+
+```bash
+cd code
+python run1_numeric.py
+```
+
+## Security Considerations
+
+The released artifacts are designed to support reproducibility and independent verification while minimizing potential security risks. The raw data included in this repository have been sanitized to remove sensitive information. Some implementation components are provided in compiled form rather than as full original source code, because unrestricted release of sensitive attack implementation details could facilitate misuse and create practical risks.
+
+During the Artifact Evaluation stage, we will provide reviewers with more complete and sensitive artifacts under the appropriate review framework.
+
+## Contact
+
+If you encounter any difficulties, please do not hesitate to reach out for assistance.
+
+Thank you sincerely for your interest, time, and patience.
